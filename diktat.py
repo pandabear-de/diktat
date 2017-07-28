@@ -117,7 +117,7 @@ def main():
     wordlist[0].test_word(bool(1))
     print(wordlist[0].last_test_date)
 
-    wordlist = add_word(wordlist,"Dominik","Sonne")
+    wordlist = add_word(wordlist,"Kind1","Spiegel")
     #wordlist.append(Word("Dominik", "20170702", "Bruder", "20170702", "0", "0"))
 
     write_status = write_wordlist(wordlist)
