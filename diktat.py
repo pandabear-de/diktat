@@ -98,30 +98,34 @@ logger = logging.getLogger()
 #logger.error("Test Msg Error")
 #logger.critical("Test Msg Critical")
 
+def get_practice_wordlist_current(user,numberwords_current, wordlist):
+    practice_wordlist_current = random.sample(wordlist, numberwords_current)
+    return practice_wordlist_current
 
-def __select_practice_words__(numberwords, wordlist):
-    logger.debug("### Entered __select_practice_words__ ###")
-    logger.debug("numberwords: " + str(numberwords))
+def get_practice_wordlist_previous(user,numberwords_previous,wordlist):
+    pass
+
+def select_practice_words(user,numberwords_current, numberwords_previous, wordlist):
+    logger.debug("### Entered select_practice_words ###")
     practice_wordlist = []
-    for i in range(numberwords):
-        logger.debug("loop: " + str(i))
-        print(wordlist[i])
-        practice_wordlist.append(wordlist[i])
+    practice_wordlist = get_practice_wordlist_current(user,numberwords_current, wordlist) #+ get_practice_wordlist_previous(user,numberwords_previous,wordlist)
     return practice_wordlist
 
 
 def main():
-    wordlist = []
-    wordlist = read_wordlist()
-    #print(wordlist[0].word)
-    wordlist[0].test_word(bool(1))
-    print(wordlist[0].last_test_date)
+    #wordlist = []
+    wordlist = read_wordlist() #read current word list
+    #print(wordlist[0].word) #print word
+    #wordlist[0].test_word(bool(1)) #this is how to record a test of a word. 0->mistake, 1-> correct
 
-    wordlist = add_word(wordlist,"Kind1","Kerze")
-    #wordlist.append(Word("Dominik", "20170702", "Bruder", "20170702", "0", "0"))
+    #wordlist = add_word(wordlist,"Kind1","Tür")  #this is how to add a new word
+    practice_wordlist = select_practice_words("a",5,2,wordlist) #compile random practice wordlist
+    for i in range(0,len(practice_wordlist)): #print current practice wordlist
+        print(practice_wordlist[i].word)
 
-    write_status = write_wordlist(wordlist)
-    print ("write_status: " + str(write_status))
+
+    write_status = write_wordlist(wordlist) #update/write wordlist to file
+    #print ("write_status: " + str(write_status))
 
 if __name__ == "__main__":
     main()
