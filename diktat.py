@@ -2,10 +2,16 @@ import logging
 import csv
 import random
 from datetime import datetime, timedelta, date
+import configparser
 
-file_path = "/Users/jakob/documents/Python_Projects/diktat/"
-file_wordlist_name = "wordlist.csv"
-file_wordlistOUT_name = "wordlist.csv"
+
+config = configparser.ConfigParser()
+config.read('diktat.ini')
+
+
+file_path = config['Paths']['file_path']
+file_wordlist_name = config['Paths']['file_wordlist_name']
+file_wordlistOUT_name = config['Paths']['file_wordlistOUT_name']
 
 class Word:
     def __init__(self,user,insert_date,word,last_test_date,number_tests,consecutive_correct):
@@ -43,8 +49,6 @@ class Word:
 def read_wordlist():
     """read_wordlist reads __read_wordlist__ into memory"""
     logger.debug("###Entered into read_wordlist ###")
-    #file_path = "/Users/jakob/documents/Python_Projects/"
-    #file_wordlist_name = "wordlist.csv"
     logger.debug("Open File: " + file_path + file_wordlist_name)
     file = open(file_path + file_wordlist_name, newline='')
     reader = csv.reader(file)
